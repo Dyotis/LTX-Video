@@ -6,20 +6,29 @@ on:
 jobs:
   push:
     runs-on: ubuntu-latest
-
     steps:
+      - name: Free up disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /usr/local/share/boost
+          sudo apt-get clean
+          docker system prune -af --volumes
+          df -h
+          
       - name: Checkout the repository
         uses: actions/checkout@v4
-
+        
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
-
+          
       - name: Install Cog CLI
         uses: replicate/setup-cog@v2
         with:
           token: ${{ secrets.REPLICATE_CLI_AUTH_TOKEN }}
-
+          
       - name: Push model to Replicate
         run: cog push dyotis/ltx-video-custom
