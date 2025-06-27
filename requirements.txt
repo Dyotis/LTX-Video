@@ -1,6 +1,3 @@
-# Install the LTX-Video package in editable mode
--e .
-
 # Core PyTorch stack - ensure compatibility
 torch>=2.1.2,<2.5.0
 torchvision>=0.16.0
