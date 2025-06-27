@@ -1,0 +1,37 @@
+# Configuration for Cog ⚙️
+# Reference: https://github.com/replicate/cog/blob/main/docs/yaml.md
+
+build:
+  # Use Python 3.10 as specified in the LTX-Video requirements
+  python_version: "3.10"
+  
+  # Enable GPU support for CUDA - essential for video generation
+  gpu: true
+  cuda: "12.2"
+  
+  # System packages needed for video processing and dependencies
+  system_packages:
+    - "ffmpeg"
+    - "git"
+    - "wget"
+    - "curl"
+    - "libgl1-mesa-glx"
+    - "libglib2.0-0"
+    - "libsm6"
+    - "libxext6"
+    - "libxrender-dev"
+    - "libgomp1"
+    - "libjpeg-dev"
+    - "libpng-dev"
+    - "build-essential"
+  
+  # Python requirements file
+  python_requirements: requirements.txt
+  
+  # Run setup script after installation
+  run:
+    - "chmod +x setup.sh"
+    - "./setup.sh"
+
+# Specify the prediction interface
+predict: "predict.py:Predictor"
