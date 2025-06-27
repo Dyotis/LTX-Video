@@ -1,35 +1,29 @@
 name: Push LTX-Video Model to Replicate
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      model_name:
+        default: 'dyotis/ltx-video-custom'
+        description: 'latest LTX video version 9.7'
+        required: true      
 jobs:
-  push:
+  push_to_replicate:
+    name: Push to Replicate
     runs-on: ubuntu-latest
     steps:
-      - name: Free up disk space
-        run: |
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /usr/local/lib/android
-          sudo rm -rf /opt/ghc
-          sudo rm -rf /usr/local/share/boost
-          sudo apt-get clean
-          docker system prune -af --volumes
-          df -h
-          
-      - name: Checkout the repository
-        uses: actions/checkout@v4
-        
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Free disk pace
+        uses: jlumbroso/free-disk-space@v1.3.1
         with:
-          python-version: '3.10'
-                  
-      - name: Install Cog CLI
+          tool-cache: false
+          docker-images: false
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Cog
         uses: replicate/setup-cog@v2
         with:
           token: ${{ secrets.REPLICATE_CLI_AUTH_TOKEN }}
-          
-      - name: cog login
-        run: echo ${{ secrets.COG_TOKEN }} | cog login --token-stdin    
-          
-      - name: Push model to Replicate
-        run: cog push dyotis/ltx-video-custom
+
+      - name: Push to Replicate
+        run: cog push r8.im/${{ inputs.model_name }}
