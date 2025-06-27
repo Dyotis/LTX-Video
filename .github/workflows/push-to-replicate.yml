@@ -22,4 +22,4 @@ jobs:
           token: ${{ secrets.REPLICATE_CLI_AUTH_TOKEN }}
 
       - name: Push model to Replicate
-        run: cog push
+        run: cog push dyotis/ltx-video-custom
