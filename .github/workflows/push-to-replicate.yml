@@ -1,0 +1,25 @@
+name: Push LTX-Video Model to Replicate
+
+on:
+  workflow_dispatch: {}  # Allows manual trigger from GitHub UI
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Cog CLI
+        uses: replicate/setup-cog@v2
+        with:
+          token: ${{ secrets.REPLICATE_CLI_AUTH_TOKEN }}
+
+      - name: Push model to Replicate
+        run: cog push
