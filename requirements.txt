@@ -1,0 +1,38 @@
+# Install the LTX-Video package in editable mode
+-e .
+
+# Core PyTorch stack - ensure compatibility
+torch>=2.1.2,<2.5.0
+torchvision>=0.16.0
+torchaudio>=2.1.0
+
+# Core dependencies for LTX-Video (pinned for stability)
+numpy>=1.21.0,<1.27.0
+pillow>=8.0.0,<11.0.0
+opencv-python>=4.5.0,<5.0.0
+imageio[ffmpeg]>=2.20.0
+transformers>=4.25.0,<5.0.0
+diffusers>=0.29.0,<1.0.0
+accelerate>=0.20.0
+safetensors>=0.3.0
+huggingface-hub>=0.15.0
+omegaconf>=2.1.0
+einops>=0.6.0
+pyyaml>=6.0
+scipy>=1.7.0
+matplotlib>=3.5.0
+
+# Additional dependencies
+requests>=2.25.0
+tqdm>=4.60.0
+packaging>=21.0
+
+# Video processing
+ffmpeg-python>=0.2.0
+av>=10.0.0
+
+# Performance optimizations (conditional)
+triton>=2.0.0; platform_machine == "x86_64" and sys_platform == "linux"
+
+# Memory and compute optimization
+psutil>=5.8.0
