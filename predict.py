@@ -7,8 +7,6 @@ import tempfile
 import yaml
 import logging
 import traceback
-from pathlib import Path
-from typing import Optional, List, Union
 import torch
 import numpy as np
 from PIL import Image
